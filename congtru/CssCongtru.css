@@ -1,0 +1,31 @@
+.waterfall {
+    display: none;
+}
+
+main {
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+
+.ly {
+    cursor: pointer;
+}
+
+.voinuoc {
+    width: 3vw;
+    position: absolute;
+    bottom: 0%;
+    transform: translate(10%, 20%);
+}
+
+.waterfall {
+    left: 15%;
+    height: 370px;
+    background-color: #87d4df;
+}
+
+.water-out {
+    display: flex;
+    justify-content: space-around;
+    opacity: 50%;
+}

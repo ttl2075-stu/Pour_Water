@@ -1,0 +1,244 @@
+/* CSS TOÀN TRANG HTML */
+.html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    user-select: none;
+    -webkit-user-drag: none;
+    margin: 10px 15px;
+}
+
+/* CSS BUTTON */
+button {
+    font-size: 1.4rem;
+    padding: 6px 30px;
+}
+
+.bn632-hover {
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 20px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 10px;
+}
+
+.bn632-hover:hover {
+    background-position: 100% 0;
+    transition: all 0.4s ease-in-out;
+}
+
+.bn632-hover:active {
+    background-position: -300% 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.bn632-hover.bn26 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+/* PHẦN SETTING */
+.setting { 
+    display: none;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 12;
+    opacity: 1;
+    padding: 20%;
+}
+.setting-container {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* PHẦN CA NƯỚC */
+nav {
+    height: 100px;
+    width: 100%;
+    background-color: rgb(178, 235, 242);
+    border-radius: 8px;
+    font-size: 24pt;
+    color: yellow;
+    font-weight: bold;
+    position: relative;
+}
+
+#canuoc {
+    position: absolute;
+    top: 20px;
+}
+
+#canuoc img {
+    width: 80px;
+}
+
+.slide {
+    animation: slide 15000ms infinite linear;
+    /* border: solid black;
+    position: absolute;
+    top: 50%;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 30px;
+    transform: rotate(45deg);
+   -webkit-transform: rotate(45deg); */
+}
+
+@keyframes slide {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: calc(100% - 80px);
+    }
+    100% {
+        left: 0;
+    }
+}
+
+/* PHẦN GIAO DIỆN CHÍNH - DÀNH CHO HS */
+main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+div.ques-ly {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #ff0000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.warpper-ly {
+    height: auto;
+    position: relative;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+
+.warpper-ly > span {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.warpper-ly .ly {
+    width: 7vw;
+    height: 300px;
+    border: 2px solid #000;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+}
+
+.naply {
+    width: 7vw;
+    position: relative;
+}
+
+.warpper-ly .ly .waterr {
+    position: relative;
+    width: 100%;
+    height: 0;
+    z-index: -1;
+    border-bottom: 1px inset #fff;
+    animation: fillWater 2000ms forwards;
+}
+
+@keyframes moNapLy {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes dongNapLy {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: 0%;
+    }
+}
+
+.waterr:first-child {
+    border-bottom: none !important;
+}
+
+.aniNone {
+    animation: none;
+}
+
+@keyframes fillWater {
+    from {
+        height: 0;
+    }
+    to {
+        height: 10%;
+    }
+}
+
+@keyframes dropWater {
+    from {
+        height: 10%;
+    }
+    to {
+        height: 0%;
+    }
+}
+
+.warpper-ly .ly .waterrr {
+    position: absolute;
+    bottom: 0;
+    z-index: -3;
+    width: 100%;
+    height: 0%;
+    background-color: #8dccf6;
+    transition: all 2000ms ease-in;
+}
+
+/* PHẦN NÚT BẤM DÀNH CHO HS */
+.action {
+    margin: 20px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action button {
+    margin: 0 50px;
+}
