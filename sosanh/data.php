@@ -1,8 +1,4 @@
 <?php 
-$colors = [];
-$sound = [];
-$size;
-$font;
 $dau = 'less';
 $debai = [1,2,3];
 $countDebai = count($debai);

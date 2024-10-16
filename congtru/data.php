@@ -1,8 +1,4 @@
 <?php 
-$colors = [];
-$sound = [];
-$size;
-$font;
 $debai = [
     [1,1],
     [1,0],

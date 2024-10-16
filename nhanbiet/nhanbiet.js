@@ -1,6 +1,12 @@
 // KHAI BÁO BIẾN
 const mainElement = document.querySelector('main');
-let waterContainer = document.querySelector('#canuoc');
+const waterContainer = document.querySelector('#canuoc');
+const waterFall = document.querySelector('.waterfall');
+const popup = document.querySelector('.popupCheck');
+const popupWin = document.querySelector('.popupCheck-win');
+const popupLose = document.querySelector('.popupCheck-lose');
+const audioWin = document.querySelector('.audio-win');
+const audioLose = document.querySelector('.audio-lose');
 let glassNames = []; // BIẾN LẤY DATA TỪ CSDL
 let glassOffsets = [];
 let glassCount;
@@ -58,97 +64,16 @@ function cfmcolor() {
 }
 
 // Xử lý màu sắc
-let colorss = [
-    [
-        '#FFDAB9',
-        '#FF8C00',
-        '#FF4500',
-        '#DC143C',
-        '#FF1493',
-        '#FF69B4',
-        '#FFA07A',
-        '#8B4513',
-        '#8A2BE2',
-        '#DA70D6',
-        '#B8860B',
-        '#FFD700',
-        '#7FFFD4',
-        '#00CED1',
-        '#00FF7F',
-        '#1E90FF',
-        '#32CD32',
-        '#4682B4',
-    ],
-    [
-        '#FF69B4' /* Hot Pink */,
-        '#FF8C69' /* Salmon */,
-        '#FF6347' /* Tomato */,
-        '#FFD700' /* Gold */,
-        '#DA70D6' /* Orchid */,
-        '#BA55D3' /* Medium Orchid */,
-        '#87CEEB' /* Sky Blue */,
-        '#40E0D0' /* Turquoise */,
-        '#3CB371' /* Medium Sea Green */,
-        '#66CDAA' /* Medium Aquamarine */,
-        '#F0E68C' /* Khaki */,
-        '#FF7F50' /* Coral */,
-        '#FF4500' /* Orange Red */,
-        '#8B0000' /* Dark Red */,
-        '#CD5C5C' /* Indian Red */,
-        '#FFA500' /* Orange */,
-        '#20B2AA' /* Light Sea Green */,
-    ],
-    [
-        '#FF4500' /* Orange Red */,
-        '#FF1493' /* Deep Pink */,
-        '#FF6347' /* Tomato */,
-        '#FFA07A' /* Light Salmon */,
-        '#DB7093' /* Pale Violet Red */,
-        '#FF69B4' /* Hot Pink */,
-        '#FF7F50' /* Coral */,
-        '#FFD700' /* Gold */,
-        '#EE82EE' /* Violet */,
-        '#BA55D3' /* Medium Orchid */,
-        '#9370DB' /* Medium Purple */,
-        '#7B68EE' /* Medium Slate Blue */,
-        '#4682B4' /* Steel Blue */,
-        '#00CED1' /* Dark Turquoise */,
-        '#48D1CC' /* Medium Turquoise */,
-        '#32CD32' /* Lime Green */,
-        '#228B22' /* Forest Green */,
-    ],
-    [
-        '#FF8C00' /* Dark Orange */,
-        '#FF4500' /* Orange Red */,
-        '#FF1493' /* Deep Pink */,
-        '#FF69B4' /* Hot Pink */,
-        '#DC143C' /* Crimson */,
-        '#B22222' /* Firebrick */,
-        '#8B4513' /* Saddle Brown */,
-        '#DAA520' /* Goldenrod */,
-        '#8A2BE2' /* Blue Violet */,
-        '#9400D3' /* Dark Violet */,
-        '#9932CC' /* Dark Orchid */,
-        '#00BFFF' /* Deep Sky Blue */,
-        '#1E90FF' /* Dodger Blue */,
-        '#5F9EA0' /* Cadet Blue */,
-        '#008B8B' /* Dark Cyan */,
-        '#3CB371' /* Medium Sea Green */,
-        '#556B2F' /* Dark Olive Green */,
-    ],
-    [
-        'red',
-        'green',
-        'blue',
-        'yellow',
-        'purple',
-        'orange',
-        'pink',
-        'brown',
-        'black',
-        'gray',
-    ]
-];
+let colorsSetting;
+// const xhr = new XMLHttpRequest();
+// xhr.open('GET', '../assets/php/setting.php', true);
+// xhr.onreadystatechange = function() {
+//     if (xhr.readyState === 4 && xhr.status === 200) {
+//         colorsSetting = JSON.parse(xhr.responseText);
+//     }
+// };
+// xhr.send();
+
 
 let colors = [
     '#FFDAB9',
@@ -186,10 +111,23 @@ function checkAnswer() {
     });
 
     if (check) {
-        alert('CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG');
+        popup.style.display = 'block';
+        popupWin.style.display = 'block';
+        audioWin.volume = 1;
+        audioWin.play();
     } else {
-        alert('BẠN ĐÃ TRẢ LỜI SAI. HÃY THỬ LẠI NHÉ!!!');
+        popup.style.display = 'block';
+        popupLose.style.display = 'block';
+        audioLose.volume = 1;
+        audioLose.play();
     }
+    setTimeout(() => { 
+        popup.style.display = 'none';
+        popupWin.style.display = 'none';
+        popupLose.style.display = 'none';
+        audioWin.pause();
+        audioLose.pause();
+    }, 5000);
 }
 
 function resetGame() {
@@ -204,6 +142,26 @@ function mousemove(event) {
     waterContainer.style.left = mouseX - 80 + 'px';
 }
 
+function animationNapLy(quesLyDiv) {
+    const naply = quesLyDiv.querySelector('.naply');
+    naply.style.animation = 'moNapLy 0.54s linear';
+
+    setTimeout(() => {
+        naply.style.animation = '';
+        naply.style.left = '100%';
+    }, 540);
+}
+
+function animationDebai(quesLyDiv) {
+    const debai = quesLyDiv.querySelector('span');
+    debai.style.animation = 'moDebai 0.54s linear';
+
+    setTimeout(() => {
+        debai.style.animation = '';
+        debai.style.left = '150%';
+    }, 540);
+}
+
 function handleWaterClick(event) {
     const target = event.clientX;
     const indexLy = glassOffsets.findIndex((currentLy) => {
@@ -214,20 +172,30 @@ function handleWaterClick(event) {
         waterContainer.querySelector('.waterfall').style.display = 'block';
         document.removeEventListener('mousemove', mousemove);
         mainElement.removeEventListener('click', handleWaterClick);
+        const quesLyDiv = glassElements[indexLy];
+        animationNapLy(quesLyDiv);
+        animationDebai(quesLyDiv);
 
         const newWater = document.createElement('div');
         newWater.className = 'waterr';
-        newWater.style.backgroundColor = getRandomColor();
+        const colorRandom = getRandomColor();
+        newWater.style.backgroundColor = colorRandom;
+        waterFall.style.backgroundColor = colorRandom;
         glassElements[indexLy].querySelector('.ly').appendChild(newWater);
 
         setTimeout(() => {
             waterContainer.querySelector('.waterfall').style.display = 'none';
             mainElement.addEventListener('click', handleWaterClick);
             document.addEventListener('mousemove', mousemove);
+            quesLyDiv.querySelector('.naply').style.animation = 'dongNapLy 0.5s linear';
+            quesLyDiv.querySelector('.naply').style.left = '0%';
+            quesLyDiv.querySelector('span').style.animation = 'dongDebai 0.5s linear';
+            quesLyDiv.querySelector('span').style.left = '50%';
         }, 2000);
     }
 }
 
+// Chưa xử lý
 function autoPourWater(event) {
     const targett = document.querySelector('#canuoc').offsetLeft;
     const target = targett + 72;
