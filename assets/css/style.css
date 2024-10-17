@@ -12,6 +12,11 @@ body {
     background-size: cover;
 }
 
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
 /* CSS BUTTON */
 button {
     font-size: 1.4rem;

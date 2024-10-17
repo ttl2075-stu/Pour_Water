@@ -40,7 +40,7 @@ function shuffleArray(array) {
     return array;
 }
 
-// Hàm xác định toạ độ các ly nước
+// Hàm xác định toạ độ các ly nước khi kích thước trình duyệt thay đổi
 function setOffsets() {
     console.log('Kích thước trình duyệt đã thay đổi');
     glassOffsets = [];
@@ -64,36 +64,42 @@ function cfmcolor() {
 }
 
 // Xử lý màu sắc
-let colorsSetting;
-// const xhr = new XMLHttpRequest();
-// xhr.open('GET', '../assets/php/setting.php', true);
-// xhr.onreadystatechange = function() {
-//     if (xhr.readyState === 4 && xhr.status === 200) {
-//         colorsSetting = JSON.parse(xhr.responseText);
-//     }
-// };
-// xhr.send();
+let colorsSetting = [];
+getColorsFromPHP();
+function getColorsFromPHP() {
+    const xhr = new XMLHttpRequest();
+    const url = '../assets/php/setting.php';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = xhr.responseText;
+            colorsSetting = JSON.parse(response);
+        } else {
+            console.error('Error retrieving colors from PHP');
+        }
+    };
+    xhr.send('action=getColorsSetting');
+}
 
-
-let colors = [
-    '#FFDAB9',
-    '#FF8C00',
-    '#FF4500',
-    '#DC143C',
-    '#FF1493',
-    '#FFA07A',
-    '#8B4513',
-    '#8A2BE2',
-    '#DA70D6',
-    '#B8860B',
-    '#FFD700',
-    '#7FFFD4',
-    '#00CED1',
-    '#00FF7F',
-    '#1E90FF',
-    '#32CD32',
-    '#4682B4',
-];
+let colors = [];
+getColorsUser();
+function getColorsUser () {
+    const xhr = new XMLHttpRequest();
+    const url = '../assets/php/setting.php';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = xhr.responseText;
+            colors = colorsSetting[(response)];
+        } else {
+            console.error('Error retrieving colors from PHP');
+            colors = colorsSetting[0];
+        }
+    };
+    xhr.send('action=getColorsUser');
+}
 
 const usedColors = [];
 function getRandomColor() {
@@ -103,6 +109,7 @@ function getRandomColor() {
     return color;
 }
 
+// Kiểm tra kết quả
 function checkAnswer() {
     glassElements = [...mainElement.querySelectorAll('.warpper-ly')];
 
@@ -130,6 +137,7 @@ function checkAnswer() {
     }, 5000);
 }
 
+// Reset game
 function resetGame() {
     mainElement.querySelectorAll('.waterr').forEach((ele) => {
         ele.remove();
@@ -142,6 +150,7 @@ function mousemove(event) {
     waterContainer.style.left = mouseX - 80 + 'px';
 }
 
+// Hiệu ứng dịch nắp ly sang trái khi đổ nước
 function animationNapLy(quesLyDiv) {
     const naply = quesLyDiv.querySelector('.naply');
     naply.style.animation = 'moNapLy 0.54s linear';
@@ -152,6 +161,7 @@ function animationNapLy(quesLyDiv) {
     }, 540);
 }
 
+// Hiệu ứng dịch chuyển đề bài khi đổ nước
 function animationDebai(quesLyDiv) {
     const debai = quesLyDiv.querySelector('span');
     debai.style.animation = 'moDebai 0.54s linear';
@@ -162,6 +172,7 @@ function animationDebai(quesLyDiv) {
     }, 540);
 }
 
+// Xử lý khi click để đổ nước
 function handleWaterClick(event) {
     const target = event.clientX;
     const indexLy = glassOffsets.findIndex((currentLy) => {
@@ -195,6 +206,7 @@ function handleWaterClick(event) {
     }
 }
 
+// Hàm xử lý đổ nước (ca nước chạy tự động)
 // Chưa xử lý
 function autoPourWater(event) {
     const targett = document.querySelector('#canuoc').offsetLeft;

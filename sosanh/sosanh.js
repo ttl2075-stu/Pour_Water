@@ -30,25 +30,44 @@ function shuffleArray(array) {
     return array;
 }
 
-const colors = [
-    '#FFDAB9',
-    '#FF8C00',
-    '#FF4500',
-    '#DC143C',
-    '#FF1493',
-    '#FFA07A',
-    '#8B4513',
-    '#8A2BE2',
-    '#DA70D6',
-    '#B8860B',
-    '#FFD700',
-    '#7FFFD4',
-    '#00CED1',
-    '#00FF7F',
-    '#1E90FF',
-    '#32CD32',
-    '#4682B4',
-];
+// Xử lý màu sắc
+let colorsSetting = [];
+getColorsFromPHP();
+function getColorsFromPHP() {
+    const xhr = new XMLHttpRequest();
+    const url = '../assets/php/setting.php';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = xhr.responseText;
+            colorsSetting = JSON.parse(response);
+        } else {
+            console.error('Error retrieving colors from PHP');
+        }
+    };
+    xhr.send('action=getColorsSetting');
+}
+
+let colors = [];
+getColorsUser();
+function getColorsUser () {
+    const xhr = new XMLHttpRequest();
+    const url = '../assets/php/setting.php';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = xhr.responseText;
+            colors = colorsSetting[(response)];
+        } else {
+            console.error('Error retrieving colors from PHP');
+            colors = colorsSetting[0];
+        }
+    };
+    xhr.send('action=getColorsUser');
+}
+
 const usedColors = [];
 function getRandomColor() {
     const remainColors = colors.filter((color) => !usedColors.includes(color));

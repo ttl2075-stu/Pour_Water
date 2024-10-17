@@ -1,8 +1,8 @@
 <?php 
 $sound = [];
-$size;
+$size = 1;
 $font;
-
+$colorsUser = 3; // Bảng màu người dùng lựa chọn
 $colors = [
     [
         '#FFDAB9',
@@ -63,25 +63,6 @@ $colors = [
         '#228B22' /* Forest Green */,
     ],
     [
-        '#FF8C00' /* Dark Orange */,
-        '#FF4500' /* Orange Red */,
-        '#FF1493' /* Deep Pink */,
-        '#FF69B4' /* Hot Pink */,
-        '#DC143C' /* Crimson */,
-        '#B22222' /* Firebrick */,
-        '#8B4513' /* Saddle Brown */,
-        '#DAA520' /* Goldenrod */,
-        '#8A2BE2' /* Blue Violet */,
-        '#9400D3' /* Dark Violet */,
-        '#9932CC' /* Dark Orchid */,
-        '#00BFFF' /* Deep Sky Blue */,
-        '#1E90FF' /* Dodger Blue */,
-        '#5F9EA0' /* Cadet Blue */,
-        '#008B8B' /* Dark Cyan */,
-        '#3CB371' /* Medium Sea Green */,
-        '#556B2F' /* Dark Olive Green */,
-    ],
-    [
         'red',
         'green',
         'blue',
@@ -95,3 +76,18 @@ $colors = [
     ]
 ];
 
+
+
+// Hàm trả biến về JS
+if (isset($_POST['action']) && $_POST['action'] == 'getColorsSetting') {
+    echo getColorsSetting();
+} else if (isset($_POST['action']) && $_POST['action'] == 'getColorsUser') {
+    echo getColorsUser();
+}
+
+function getColorsSetting () {
+    return json_encode($GLOBALS['colors']);
+}
+function getColorsUser () {
+    return json_encode($GLOBALS['colorsUser']);
+}
