@@ -33,15 +33,17 @@
             <button class="bn632-hover bn26" onclick="openSetting()" style="position: absolute; z-index: 10; right: 10px; top: 10px">Cài đặt</button>
             <div class="setting">
                 <div class="setting-container">
-                    <h1>CÀI ĐẶT</h1>
-                    <h2>Màu sắc</h2>
-                    <select name="colorSetting" id="colorSetting">
-                        <option value="1">Màu sắc 1</option>
-                        <option value="2">Màu sắc 2</option>
-                        <option value="3">Màu sắc 3</option>
-                        <option value="4">Màu sắc 4</option>
-                        <option value="5">Màu sắc 5</option>
-                    </select>
+                    <h2>CÀI ĐẶT</h2>
+                    <div class="setting-container-select">
+                        <h3>Màu sắc: </h3>
+                        <select name="colorSetting" id="colorSetting">
+                            <option value="1">Màu sắc 1</option>
+                            <option value="2">Màu sắc 2</option>
+                            <option value="3">Màu sắc 3</option>
+                            <option value="4">Màu sắc 4</option>
+                            <option value="5">Màu sắc 5</option>
+                        </select>
+                    </div>
                     <div>
                         <button class="bn632-hover bn26 cancel" id="cancelcolor" onclick="cancelcolor()">Huỷ bỏ</button>
                         <button id="muteButton" class="bn632-hover bn26" onclick="cancelcolor()" >Âm thanh</button>
@@ -67,9 +69,10 @@
         <main>
             <?php 
                 for ($i = 1; $i <= $countDebai; $i++) {
+                    $randomNaply = rand(1, 8);
                     echo "
                         <div class=\"warpper-ly\">
-                            <img src=\"../media/nap$i.png\" alt=\"\" class=\"naply\">
+                            <img src=\"../media/nap$randomNaply.png\" alt=\"\" class=\"naply\">
                             <div class=\"ly\">
                             </div>
                             <span>{$debai[$i-1]}</span>

@@ -113,6 +113,36 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.setting-container h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+.setting-container-select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.setting-container h3 {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.setting-container-select select {
+    font-size: 1.4rem;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex-grow: 1;
+}
+
 /* PHẦN YÊU CẦU ĐỀ BÀI */
 .yeucau {
     text-align: center;
