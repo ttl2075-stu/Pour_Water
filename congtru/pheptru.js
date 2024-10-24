@@ -94,7 +94,25 @@ function remove1waterr(lyAddWater) {
 
 
 // Gọi hàm callGetDebai để thực hiện AJAX request
-callGetDebai();
+getDebai();
+function getDebai () {
+    const xhr = new XMLHttpRequest();
+    const url = './data.php';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = xhr.responseText;
+            glassNames = JSON.parse(response);
+            glassCount = glassNames.length;
+            renderLy();
+        } else {
+            console.error('Error retrieving colors from PHP');
+            Window.reload();
+        }
+    };
+    xhr.send('action=getDebai');
+}
 
 function renderLy() {
     mainElement.innerHTML = '';
@@ -111,7 +129,7 @@ function renderLy() {
                 </div>
                 <div class="voinuoc">
                     <img src="../media/voi_nuoc.png" alt=""/>
-                    <div class="waterfall" style="display: none;">
+                    <div class="waterfall pheptru" style="display: none;">
                         <div class="water">
                             <div class="fall m slow light-blue"></div>
                             <div class="fall s medium teal"></div>

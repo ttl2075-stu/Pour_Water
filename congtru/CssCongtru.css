@@ -1,5 +1,6 @@
 .waterfall {
     display: none;
+    background-color: #87d4df;
 }
 
 main {
@@ -18,11 +19,15 @@ main {
     transform: translate(10%, 20%);
 }
 
-.waterfall {
-    left: 15%;
-    height: 370px;
-    background-color: #87d4df;
+.waterfall.phepcong {
+    height: 450px;
 }
+
+.waterfall.pheptru {
+    left: 15%;
+    height: 350px;
+}
+
 
 .water-out {
     display: flex;
